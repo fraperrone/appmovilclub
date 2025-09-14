@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Layouts">
         <activity
+            android:name=".Mostrar_afiliados"
+            android:exported="false" />
+        <activity
+            android:name=".RealizarPago"
+            android:exported="false" />
+        <activity
             android:name=".MainMenu"
             android:exported="false" />
         <activity
@@ -23,6 +29,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
