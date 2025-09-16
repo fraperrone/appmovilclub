@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F0F0"
+    android:background="#FFEEEE"
     tools:context=".MainMenu">
 
     <!-- Contenedor vertical -->
@@ -27,43 +27,192 @@
         android:baselineAligned="false">
 
         <!-- Botón 1 -->
-        <Button
-            android:id="@+id/btnOpcion1"
-            android:layout_width="412dp"
-            android:layout_height="162dp"
-            android:text="Opción 1"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#BF3B3B"
-            android:layout_marginBottom="16dp" />
 
-        <!-- Botón 2 -->
-        <Button
-            android:id="@+id/btnOpcion2"
-            android:layout_width="412dp"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnPagoContainer"
+            android:layout_width="wrap_content"
             android:layout_height="162dp"
-            android:text="Opción 2"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#BF3B3B"
-            android:layout_marginBottom="16dp" />
+            android:padding="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/rounded_button"
+            android:layout_marginBottom="16dp"
+
+            >
+            <!--            figma medidas contenedor 412 x162-->
+
+
+            <ImageView
+                android:id="@+id/btnPagoIcon"
+                android:layout_width="132dp"
+                android:layout_height="132dp"
+                android:src="@drawable/realizar_pago_logo"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+
+                />
+
+            <TextView
+                android:id="@+id/btnPagoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Realizar Pago"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@id/btnPagoIcon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnOpcion11"-->
+<!--            android:layout_width="412dp"-->
+<!--            android:layout_height="162dp"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            android:backgroundTint="#440909"-->
+<!--            android:text="Realizar Pago"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            app:cornerRadius="24dp"-->
+<!--            app:icon="@drawable/realizar_pago"-->
+<!--            app:iconGravity="textStart"-->
+<!--            app:iconPadding="8dp"-->
+
+<!--            />-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnRegistrarContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="162dp"
+            android:padding="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/rounded_button"
+            android:layout_marginBottom="16dp"
+
+            >
+            <!--            figma medidas contenedor 412 x162-->
+
+
+            <ImageView
+                android:id="@+id/btnRegistrarIcon"
+                android:layout_width="132dp"
+                android:layout_height="132dp"
+                android:src="@drawable/registrar_cliente_logo"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+
+                />
+
+            <TextView
+                android:id="@+id/btnRegistrarText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Registrar Cliente"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@id/btnRegistrarIcon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Botón 3 -->
-        <Button
-            android:id="@+id/btnOpcion3"
-            android:layout_width="412dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnVerContainer"
+            android:layout_width="wrap_content"
             android:layout_height="162dp"
-            android:text="Opción 3"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#440909"
-            android:layout_marginBottom="16dp" />
+            android:padding="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/rounded_button"
+            android:layout_marginBottom="16dp"
+
+            >
+            <!--            figma medidas contenedor 412 x162-->
+
+
+            <ImageView
+                android:id="@+id/btnVerIcon"
+                android:layout_width="132dp"
+                android:layout_height="132dp"
+                android:src="@drawable/ver_afiliados"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+
+                />
+
+            <TextView
+                android:id="@+id/btnVerText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ver Afiliados"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@id/btnVerIcon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Botón 4 -->
-        <Button
-            android:id="@+id/btnOpcion4"
-            android:layout_width="412dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnDeudoresContainer"
+            android:layout_width="wrap_content"
             android:layout_height="162dp"
-            android:text="Opción 4"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#BF3B3B" />
+            android:padding="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/rounded_button"
+            android:layout_marginBottom="16dp"
+
+            >
+            <!--            figma medidas contenedor 412 x162-->
+
+
+            <ImageView
+                android:id="@+id/btnDeudoresIcon"
+                android:layout_width="132dp"
+                android:layout_height="132dp"
+                android:src="@drawable/ver_deudores_logo"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+
+                />
+
+            <TextView
+                android:id="@+id/btnDeudoresText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ver Deudores"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@id/btnDeudoresIcon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
