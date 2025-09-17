@@ -30,5 +30,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // hacemos que btn realizar pago llame
+
     }
 }
