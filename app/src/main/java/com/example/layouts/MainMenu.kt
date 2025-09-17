@@ -45,6 +45,11 @@ class MainMenu : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val btnRegistrarContainer = findViewById<ConstraintLayout>(R.id.btnRegistrarContainer)
+        btnRegistrarContainer.setOnClickListener {
+            val intent = Intent(this, RegistrarClienteActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }
