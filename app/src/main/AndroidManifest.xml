@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Layouts">
         <activity
+            android:name=".RegistrarClienteActivity"
+            android:exported="false" />
+        <activity
             android:name=".Mostrar_afiliados"
             android:exported="false" />
         <activity
