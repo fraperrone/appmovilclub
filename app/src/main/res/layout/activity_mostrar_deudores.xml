@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:fontFamily="@font/genos_medium"
-        android:text="Enviar"
+        android:text="Mostrar"
         app:layout_constraintTop_toBottomOf="@id/textView_titulo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
