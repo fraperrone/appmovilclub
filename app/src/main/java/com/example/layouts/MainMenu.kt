@@ -51,5 +51,12 @@ class MainMenu : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //btnDeudoresContainer
+        val btnDeudoresContainer = findViewById<ConstraintLayout>(R.id.btnDeudoresContainer)
+        btnDeudoresContainer.setOnClickListener {
+            val intent = Intent(this, MostrarDeudoresActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }
