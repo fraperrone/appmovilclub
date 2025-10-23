@@ -36,7 +36,7 @@
             android:padding="16dp"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/rounded_button"
+            android:background="@drawable/bg_button_main_menu"
             android:layout_marginBottom="16dp"
 
             >
@@ -47,7 +47,7 @@
                 android:id="@+id/btnPagoIcon"
                 android:layout_width="132dp"
                 android:layout_height="132dp"
-                android:src="@drawable/realizar_pago_logo"
+                android:src="@drawable/logo_realizar_pago"
                 android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -96,7 +96,7 @@
             android:padding="16dp"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/rounded_button"
+            android:background="@drawable/bg_button_main_menu"
             android:layout_marginBottom="16dp"
 
             >
@@ -107,7 +107,7 @@
                 android:id="@+id/btnRegistrarIcon"
                 android:layout_width="132dp"
                 android:layout_height="132dp"
-                android:src="@drawable/registrar_cliente_logo"
+                android:src="@drawable/logo_registrar_cliente"
                 android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -138,7 +138,7 @@
             android:padding="16dp"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/rounded_button"
+            android:background="@drawable/bg_button_main_menu"
             android:layout_marginBottom="16dp"
 
             >
@@ -149,7 +149,7 @@
                 android:id="@+id/btnVerIcon"
                 android:layout_width="132dp"
                 android:layout_height="132dp"
-                android:src="@drawable/ver_afiliados"
+                android:src="@drawable/logo_ver_afiliados"
                 android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -180,7 +180,7 @@
             android:padding="16dp"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/rounded_button"
+            android:background="@drawable/bg_button_main_menu"
             android:layout_marginBottom="16dp"
 
             >
@@ -191,7 +191,7 @@
                 android:id="@+id/btnDeudoresIcon"
                 android:layout_width="132dp"
                 android:layout_height="132dp"
-                android:src="@drawable/ver_deudores_logo"
+                android:src="@drawable/logo_ver_deudores"
                 android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

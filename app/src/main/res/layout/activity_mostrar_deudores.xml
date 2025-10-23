@@ -57,7 +57,7 @@
             android:id="@+id/footer_container"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/footer_background"
+            android:background="@drawable/bg_footer"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:paddingStart="16dp"
