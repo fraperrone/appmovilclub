@@ -2,20 +2,18 @@ package com.example.layouts
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material3.Button
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 import androidx.constraintlayout.widget.ConstraintLayout
 
-class MainMenu : AppCompatActivity() {
+class MenuPrincipalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main_menu)
+        setContentView(R.layout.activity_menu_principal)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -34,14 +32,14 @@ class MainMenu : AppCompatActivity() {
         val btnPagoContainer = findViewById<ConstraintLayout>(R.id.btnPagoContainer)
 
         btnPagoContainer.setOnClickListener {
-            val intent = Intent(this, RealizarPago::class.java) // o PagoActivity::class.java
+            val intent = Intent(this, RealizarPagoActivity::class.java) // o PagoActivity::class.java
             startActivity(intent)
         }
 
 
         val btnVerContainer = findViewById<ConstraintLayout>(R.id.btnVerContainer)
         btnVerContainer.setOnClickListener {
-            val intent = Intent(this, Mostrar_afiliados::class.java)
+            val intent = Intent(this, MostrarAfiliadosActivity::class.java)
             startActivity(intent)
         }
 

@@ -12,22 +12,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Layouts">
         <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".MostrarDeudoresActivity"
             android:exported="false" />
         <activity
             android:name=".RegistrarClienteActivity"
             android:exported="false" />
         <activity
-            android:name=".Mostrar_afiliados"
+            android:name=".MostrarAfiliadosActivity"
             android:exported="false" />
         <activity
-            android:name=".RealizarPago"
+            android:name=".RealizarPagoActivity"
             android:exported="false" />
         <activity
-            android:name=".MainMenu"
+            android:name=".MenuPrincipalActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.layouts.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
