@@ -16,5 +16,8 @@ class RegistrarClienteActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        //configuracion boton menu principal
+        BotonMenuHelper.configurarBotonMenu(this, findViewById(android.R.id.content))
     }
 }

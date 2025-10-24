@@ -15,13 +15,13 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MostrarDeudoresActivity"
+            android:name=".VerDeudoresActivity"
             android:exported="false" />
         <activity
             android:name=".RegistrarClienteActivity"
             android:exported="false" />
         <activity
-            android:name=".MostrarAfiliadosActivity"
+            android:name=".VerAfiliadosActivity"
             android:exported="false" />
         <activity
             android:name=".RealizarPagoActivity"

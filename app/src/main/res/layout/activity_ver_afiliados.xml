@@ -92,13 +92,9 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <ImageView
-            android:id="@+id/btn_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_menu"
-            app:tint="@color/white"
-            android:contentDescription="Botón de menú de opciones" />
+
+        <include layout="@layout/button_menu" />
+
 
     </LinearLayout>
 
