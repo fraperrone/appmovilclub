@@ -20,7 +20,8 @@ class VerAfiliadosActivity : AppCompatActivity() {
         //configuracion boton menu principal
         BotonMenuHelper.configurarBotonMenu(this, findViewById(android.R.id.content))
 
-
+        //configuramos boton back principal
+        BotonBackHelper.configurarBotonMenu(this, findViewById(android.R.id.content))
 
 //        val btnMenu = findViewById<ImageView>(R.id.btn_menu)
 //        btnMenu.setOnClickListener {

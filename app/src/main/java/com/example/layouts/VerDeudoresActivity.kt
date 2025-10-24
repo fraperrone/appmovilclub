@@ -17,6 +17,9 @@ class VerDeudoresActivity : AppCompatActivity() {
             insets
         }
 
+        //configuramos boton back principal
+        BotonBackHelper.configurarBotonMenu(this, findViewById(android.R.id.content))
+
         //configuracion boton menu principal
         BotonMenuHelper.configurarBotonMenu(this, findViewById(android.R.id.content))
     }

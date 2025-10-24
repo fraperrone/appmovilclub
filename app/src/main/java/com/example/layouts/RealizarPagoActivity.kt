@@ -19,5 +19,10 @@ class RealizarPagoActivity : AppCompatActivity() {
 
         //configuracion boton menu principal
         BotonMenuHelper.configurarBotonMenu(this, findViewById(android.R.id.content))
+
+        //configuramos boton back principal
+        BotonBackHelper.configurarBotonMenu(this, findViewById(android.R.id.content))
+
+
     }
 }

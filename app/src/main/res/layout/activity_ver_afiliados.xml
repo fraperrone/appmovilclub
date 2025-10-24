@@ -79,13 +79,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_back"
-            app:tint="@color/white"
-            android:contentDescription="Botón de volver atrás" />
+        <include layout="@layout/button_back" />
 
         <View
             android:layout_width="0dp"
