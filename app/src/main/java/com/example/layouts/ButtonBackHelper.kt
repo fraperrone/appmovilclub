@@ -8,9 +8,9 @@ import android.widget.ImageView
 import com.example.layouts.MenuPrincipalActivity
 import com.example.layouts.R
 
-object BotonMenuHelper {
+object BotonBackHelper {
     fun configurarBotonMenu(context: Context, rootView: View) {
-        val btn = rootView.findViewById<ImageView>(R.id.btnMenuPrincipal)
+        val btn = rootView.findViewById<ImageView>(R.id.btnBackPrincipal)
         btn?.setOnClickListener {
             val intent = Intent(context, MenuPrincipalActivity::class.java)
             context.startActivity(intent)

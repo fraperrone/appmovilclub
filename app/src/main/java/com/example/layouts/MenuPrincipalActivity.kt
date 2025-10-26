@@ -2,6 +2,7 @@ package com.example.layouts
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -94,6 +95,23 @@ class MenuPrincipalActivity : AppCompatActivity() {
 
         onBackPressedDispatcher.addCallback(this, callback)
 
+        //agregamos feature de boton de salida del menu
+        val btnBack = findViewById<ImageView>(R.id.btn_back)
+        btnBack.setOnClickListener {
+            //agregamos ventana para confirmar salida
+            val builder = AlertDialog.Builder(this@MenuPrincipalActivity)
+            builder.setTitle("Cerrar sesión")
+            builder.setMessage("¿Deseás cerrar sesión y salir de la app?")
+            builder.setCancelable(false) // Evita que se cierre tocando fuera del modal
+            builder.setPositiveButton("Sí") { _, _ ->
+                // cerrarSesion()
+                finish() // Cierra la actividad actual
+            }
+            builder.setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss() // Cierra solo el modal
+            }
+            builder.show()
+        }
 
 
 
