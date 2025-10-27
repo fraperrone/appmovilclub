@@ -5,8 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.widget.ImageView
-import com.example.layouts.MenuPrincipalActivity
-import com.example.layouts.R
 
 object BotonMenuHelper {
     fun configurarBotonMenu(context: Context, rootView: View) {
