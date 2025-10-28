@@ -15,6 +15,7 @@ import com.example.layouts.data.model.ClienteConDeuda
 
 class VerDeudoresActivity : AppCompatActivity() {
 
+    private lateinit var textViewBienvenida: TextView
     private lateinit var buttonMostrar: Button
     private lateinit var recyclerView: RecyclerView
 
@@ -33,6 +34,9 @@ class VerDeudoresActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        // Configurar bienvenida
+        configurarBienvenida()
+
         inicializarVistas()
         pagoRepository = PagoRepository(this)
 
@@ -42,6 +46,12 @@ class VerDeudoresActivity : AppCompatActivity() {
         // Configurar botones de navegación
         BotonBackHelper.configurarBotonMenu(this, findViewById(android.R.id.content))
         BotonMenuHelper.configurarBotonMenu(this, findViewById(android.R.id.content))
+    }
+
+    private fun configurarBienvenida() {
+        textViewBienvenida = findViewById(R.id.textViewBienvenida)
+        val userName = SessionManager.getUserName(this)
+        textViewBienvenida.text = "Bienvenida, ${userName ?: "Usuario"}"
     }
 
     private fun inicializarVistas() {
@@ -61,15 +71,29 @@ class VerDeudoresActivity : AppCompatActivity() {
         }
     }
 
+//    private fun mostrarDeudores() {
+//        val clientesSinPagos = pagoRepository.obtenerClientesSinPagos()
+//        val clientesConDeuda = pagoRepository.obtenerClientesConCuotaVencida()
+//
+//        val deudoresTotales = clientesSinPagos + clientesConDeuda
+//
+//        if (deudoresTotales.isEmpty()) {
+//            Toast.makeText(this, "No hay clientes con deuda ni sin pagos", Toast.LENGTH_SHORT).show()
+//        }
+//
+//        adapter.actualizarDatos(deudoresTotales)
+//    }
     private fun mostrarDeudores() {
-        val deudores = pagoRepository.obtenerClientesConCuotaVencida()
+        val deudoresTotales = pagoRepository.obtenerTodosLosDeudores()
 
-        if (deudores.isEmpty()) {
-            Toast.makeText(this, "No hay clientes con cuotas vencidas", Toast.LENGTH_SHORT).show()
+        if (deudoresTotales.isEmpty()) {
+            Toast.makeText(this, "No hay clientes con deuda ni sin pagos", Toast.LENGTH_SHORT).show()
         }
 
-        adapter.actualizarDatos(deudores)
+        adapter.actualizarDatos(deudoresTotales)
     }
+
+
 }
 
 class DeudoresAdapter(
@@ -101,15 +125,21 @@ class DeudoresAdapter(
             holder.textViewVencimiento.text = "Vencimiento: ${deudor.ultimoPago.fechaVencimiento}"
             holder.textViewDiasVencido.text = "Vencido hace ${deudor.diasVencido} día(s)"
 
-            // Cambiar color según días vencidos
             val color = when {
                 deudor.diasVencido > 30 -> android.graphics.Color.RED
                 deudor.diasVencido > 15 -> android.graphics.Color.parseColor("#FF6B00")
                 else -> android.graphics.Color.parseColor("#FFA500")
             }
             holder.textViewDiasVencido.setTextColor(color)
+
+        } else {
+            // Cliente sin pagos
+            holder.textViewVencimiento.text = "Vencimiento: Sin pagos registrados"
+            holder.textViewDiasVencido.text = ""
+            holder.textViewDiasVencido.setTextColor(android.graphics.Color.BLACK)
         }
     }
+
 
     override fun getItemCount() = deudores.size
 

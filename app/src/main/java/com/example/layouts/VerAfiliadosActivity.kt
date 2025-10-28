@@ -16,6 +16,7 @@ import com.example.layouts.data.model.Cliente
 
 class VerAfiliadosActivity : AppCompatActivity() {
 
+    private lateinit var textViewBienvenida: TextView
     private lateinit var buttonMostrar: Button
     private lateinit var recyclerView: RecyclerView
 
@@ -34,6 +35,9 @@ class VerAfiliadosActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        // Configurar bienvenida
+        configurarBienvenida()
+
         inicializarVistas()
         clienteRepository = ClienteRepository(this)
 
@@ -43,6 +47,12 @@ class VerAfiliadosActivity : AppCompatActivity() {
         // Configurar botones de navegación
         BotonMenuHelper.configurarBotonMenu(this, findViewById(android.R.id.content))
         BotonBackHelper.configurarBotonMenu(this, findViewById(android.R.id.content))
+    }
+
+    private fun configurarBienvenida() {
+        textViewBienvenida = findViewById(R.id.textViewBienvenida)
+        val userName = SessionManager.getUserName(this)
+        textViewBienvenida.text = "Bienvenida, ${userName ?: "Usuario"}"
     }
 
     private fun inicializarVistas() {

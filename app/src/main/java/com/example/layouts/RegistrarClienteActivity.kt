@@ -11,6 +11,7 @@ import com.example.layouts.data.model.TipoCliente
 
 class RegistrarClienteActivity : AppCompatActivity() {
 
+    private lateinit var textViewBienvenida: TextView
     private lateinit var editTextNombre: EditText
     private lateinit var editTextApellido: EditText
     private lateinit var editTextDocumento: EditText
@@ -33,6 +34,9 @@ class RegistrarClienteActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        // Configurar bienvenida
+        configurarBienvenida()
+
         inicializarVistas()
         clienteRepository = ClienteRepository(this)
 
@@ -41,6 +45,12 @@ class RegistrarClienteActivity : AppCompatActivity() {
         // Configurar botones de navegación usando tus helpers
         BotonBackHelper.configurarBotonMenu(this, findViewById(android.R.id.content))
         BotonMenuHelper.configurarBotonMenu(this, findViewById(android.R.id.content))
+    }
+
+    private fun configurarBienvenida() {
+        textViewBienvenida = findViewById(R.id.textViewBienvenida)
+        val userName = SessionManager.getUserName(this)
+        textViewBienvenida.text = "Bienvenida, ${userName ?: "Usuario"}"
     }
 
     private fun inicializarVistas() {
@@ -128,7 +138,8 @@ class RegistrarClienteActivity : AppCompatActivity() {
                 "Cliente registrado exitosamente",
                 Toast.LENGTH_SHORT
             ).show()
-            limpiarCampos()
+//            limpiarCampos()
+            finish()
         } else {
             Toast.makeText(
                 this,
