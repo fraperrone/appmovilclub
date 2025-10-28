@@ -58,7 +58,7 @@ class RealizarPagoActivity : AppCompatActivity() {
     private fun configurarBienvenida() {
         textViewBienvenida = findViewById(R.id.textViewBienvenida)
         val userName = SessionManager.getUserName(this)
-        textViewBienvenida.text = "Bienvenida, ${userName ?: "Usuario"}"
+        textViewBienvenida.text = "Bienvenido, ${userName ?: "Usuario"}"
     }
 
     private fun inicializarVistas() {
