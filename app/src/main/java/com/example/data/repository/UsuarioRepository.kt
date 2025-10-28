@@ -1,9 +1,9 @@
-package com.example.layouts.data.repository
+package com.example.data.repository
 
 import android.content.Context
 import android.database.Cursor
-import com.example.layouts.data.db.DatabaseHelper
-import com.example.layouts.data.model.Usuario
+import com.example.data.db.DatabaseHelper
+import com.example.data.model.Usuario
 
 class UsuarioRepository(context: Context) {
     private val dbHelper = DatabaseHelper(context)

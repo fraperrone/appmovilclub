@@ -1,11 +1,11 @@
-package com.example.layouts.data.repository
+package com.example.data.repository
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
-import com.example.layouts.data.db.DatabaseHelper
-import com.example.layouts.data.model.Cliente
-import com.example.layouts.data.model.TipoCliente
+import com.example.data.db.DatabaseHelper
+import com.example.data.model.Cliente
+import com.example.data.model.TipoCliente
 import java.text.SimpleDateFormat
 import java.util.*
 

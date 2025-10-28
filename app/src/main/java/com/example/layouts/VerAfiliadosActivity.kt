@@ -11,8 +11,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.layouts.data.repository.ClienteRepository
-import com.example.layouts.data.model.Cliente
+import com.example.data.repository.ClienteRepository
+import com.example.data.model.Cliente
 
 class VerAfiliadosActivity : AppCompatActivity() {
 

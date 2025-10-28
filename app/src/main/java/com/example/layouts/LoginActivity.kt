@@ -10,7 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.layouts.data.repository.UsuarioRepository
+import com.example.data.repository.UsuarioRepository
 
 class LoginActivity : AppCompatActivity() {
 

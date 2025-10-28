@@ -1,13 +1,13 @@
-package com.example.layouts.data.repository
+package com.example.data.repository
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.util.Log
-import com.example.layouts.data.db.DatabaseHelper
-import com.example.layouts.data.model.ClienteConDeuda
-import com.example.layouts.data.model.Pago
-import com.example.layouts.data.model.TipoPago
+import com.example.data.db.DatabaseHelper
+import com.example.data.model.ClienteConDeuda
+import com.example.data.model.Pago
+import com.example.data.model.TipoPago
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit

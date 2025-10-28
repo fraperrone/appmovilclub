@@ -11,9 +11,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.layouts.data.repository.PagoRepository
-import com.example.layouts.data.model.ClienteConDeuda
-import com.example.layouts.data.repository.ClienteRepository
+import com.example.data.repository.PagoRepository
+import com.example.data.model.ClienteConDeuda
 
 class VerDeudoresActivity : AppCompatActivity() {
 

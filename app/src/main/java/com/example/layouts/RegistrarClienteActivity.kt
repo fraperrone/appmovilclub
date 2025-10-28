@@ -5,9 +5,9 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.layouts.data.repository.ClienteRepository
-import com.example.layouts.data.model.Cliente
-import com.example.layouts.data.model.TipoCliente
+import com.example.data.repository.ClienteRepository
+import com.example.data.model.Cliente
+import com.example.data.model.TipoCliente
 
 class RegistrarClienteActivity : AppCompatActivity() {
 
