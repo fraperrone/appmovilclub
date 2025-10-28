@@ -11,9 +11,16 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.Layouts.Launcher" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/darkred</item>
+        <item name="android:statusBarColor">@color/darkred</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>
 
 
