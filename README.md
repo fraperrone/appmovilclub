@@ -11,3 +11,15 @@ Este proyecto tiene como objetivo facilitar la administración de socios y no so
 - Listado automático de socios con cuota vencida en la fecha actual.
 - Validaciones de entrada y mensajes de error claros.
 - Espacio para anexar capturas de pantalla y flujos operativos.
+
+## Credenciales importantes
+
+Estas credenciales permiten acceder al sistema con distintos niveles de permisos:
+
+- **Administrador:**  
+  Usuario: `admin`  
+  Contraseña: `admin123`
+
+- **Empleado:**  
+  Usuario: `emp`  
+  Contraseña: `emp123`
