@@ -7,11 +7,12 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.layouts.data.repository.ClienteRepository
-import com.example.layouts.data.repository.PagoRepository
-import com.example.layouts.data.model.Cliente
-import com.example.layouts.data.model.Pago
-import com.example.layouts.data.model.TipoPago
+import com.example.data.repository.ClienteRepository
+import com.example.data.repository.PagoRepository
+import com.example.data.model.Cliente
+import com.example.data.model.Pago
+import com.example.data.model.TipoCliente
+import com.example.data.model.TipoPago
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -57,7 +58,7 @@ class RealizarPagoActivity : AppCompatActivity() {
     private fun configurarBienvenida() {
         textViewBienvenida = findViewById(R.id.textViewBienvenida)
         val userName = SessionManager.getUserName(this)
-        textViewBienvenida.text = "Bienvenida, ${userName ?: "Usuario"}"
+        textViewBienvenida.text = "Bienvenido, ${userName ?: "Usuario"}"
     }
 
     private fun inicializarVistas() {
@@ -96,14 +97,14 @@ class RealizarPagoActivity : AppCompatActivity() {
             editTextApellido.setText(clienteActual!!.apellido)
 
             val monto = when (clienteActual!!.tipoCliente) {
-                com.example.layouts.data.model.TipoCliente.SOCIO -> "25000"
-                com.example.layouts.data.model.TipoCliente.NO_SOCIO -> "3000"
+                TipoCliente.SOCIO -> "25000"
+                TipoCliente.NO_SOCIO -> "3000"
             }
             editTextMonto.setText(monto)
 
             val concepto = when (clienteActual!!.tipoCliente) {
-                com.example.layouts.data.model.TipoCliente.SOCIO -> "Cuota Mensual"
-                com.example.layouts.data.model.TipoCliente.NO_SOCIO -> "Cuota Diaria"
+                TipoCliente.SOCIO -> "Cuota Mensual"
+                TipoCliente.NO_SOCIO -> "Cuota Diaria"
             }
             editTextConcepto.setText(concepto)
         } else {
@@ -181,9 +182,9 @@ class RealizarPagoActivity : AppCompatActivity() {
                     if (fechaVencimiento.after(hoy) || fechaVencimiento == hoy) {
                         // El pago aún está vigente
                         val mensaje = when (clienteActual!!.tipoCliente) {
-                            com.example.layouts.data.model.TipoCliente.SOCIO ->
+                            TipoCliente.SOCIO ->
                                 "Este cliente tiene un pago mensual activo hasta ${ultimoPago.fechaVencimiento}. No puede realizar otro pago hasta que venza."
-                            com.example.layouts.data.model.TipoCliente.NO_SOCIO ->
+                            TipoCliente.NO_SOCIO ->
                                 "Este cliente ya pagó hoy. Debe esperar hasta mañana para realizar otro pago."
                         }
 
@@ -204,8 +205,8 @@ class RealizarPagoActivity : AppCompatActivity() {
         val concepto = editTextConcepto.text.toString().trim()
 
         val tipoPago = when (clienteActual!!.tipoCliente) {
-            com.example.layouts.data.model.TipoCliente.SOCIO -> TipoPago.MENSUAL
-            com.example.layouts.data.model.TipoCliente.NO_SOCIO -> TipoPago.DIARIA
+            TipoCliente.SOCIO -> TipoPago.MENSUAL
+            TipoCliente.NO_SOCIO -> TipoPago.DIARIA
         }
 
         val fechaVencimiento = pagoRepository.calcularFechaVencimiento(tipoPago)
