@@ -86,6 +86,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
             INSERT INTO $TABLE_USUARIOS ($COLUMN_USUARIO_NOMBRE, $COLUMN_USUARIO_USERNAME, $COLUMN_USUARIO_PASSWORD) 
             VALUES ('Administrador', 'admin', 'admin123')
         """)
+        db?.execSQL("""
+            INSERT INTO $TABLE_USUARIOS ($COLUMN_USUARIO_NOMBRE, $COLUMN_USUARIO_USERNAME, $COLUMN_USUARIO_PASSWORD) 
+            VALUES ('Empleado', 'emp', 'emp123')
+        """)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
