@@ -1,6 +1,7 @@
 package com.example.layouts
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.layouts.data.repository.PagoRepository
 import com.example.layouts.data.model.ClienteConDeuda
+import com.example.layouts.data.repository.ClienteRepository
 
 class VerDeudoresActivity : AppCompatActivity() {
 
@@ -71,29 +73,37 @@ class VerDeudoresActivity : AppCompatActivity() {
         }
     }
 
-//    private fun mostrarDeudores() {
-//        val clientesSinPagos = pagoRepository.obtenerClientesSinPagos()
-//        val clientesConDeuda = pagoRepository.obtenerClientesConCuotaVencida()
-//
-//        val deudoresTotales = clientesSinPagos + clientesConDeuda
-//
-//        if (deudoresTotales.isEmpty()) {
-//            Toast.makeText(this, "No hay clientes con deuda ni sin pagos", Toast.LENGTH_SHORT).show()
-//        }
-//
-//        adapter.actualizarDatos(deudoresTotales)
-//    }
     private fun mostrarDeudores() {
+        Log.d("VerDeudores", "=== Iniciando búsqueda de deudores ===")
+
+        // Obtener deudores
+        val clientesConCuotaVencida = pagoRepository.obtenerClientesConCuotaVencida()
+        val clientesSinPagos = pagoRepository.obtenerClientesSinPagos()
         val deudoresTotales = pagoRepository.obtenerTodosLosDeudores()
 
+        Log.d("VerDeudores", "=== RESULTADOS ===")
+        Log.d("VerDeudores", "Clientes con cuota vencida: ${clientesConCuotaVencida.size}")
+        Log.d("VerDeudores", "Clientes sin pagos: ${clientesSinPagos.size}")
+        Log.d("VerDeudores", "Total deudores: ${deudoresTotales.size}")
+
+        // Mostrar detalles de cada deudor encontrado
+        clientesConCuotaVencida.forEach { deudor ->
+            Log.d("VerDeudores", "VENCIDO: ${deudor.cliente.nombre} - Días: ${deudor.diasVencido}")
+        }
+
+        clientesSinPagos.forEach { deudor ->
+            Log.d("VerDeudores", "SIN PAGOS: ${deudor.cliente.nombre}")
+        }
+
         if (deudoresTotales.isEmpty()) {
-            Toast.makeText(this, "No hay clientes con deuda ni sin pagos", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "No hay clientes con deuda", Toast.LENGTH_SHORT).show()
+        } else {
+            val mensaje = "Vencidos: ${clientesConCuotaVencida.size}, Sin pagos: ${clientesSinPagos.size}"
+            Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
         }
 
         adapter.actualizarDatos(deudoresTotales)
     }
-
-
 }
 
 class DeudoresAdapter(
@@ -122,8 +132,16 @@ class DeudoresAdapter(
         holder.textViewTipo.text = "Tipo: ${deudor.cliente.tipoCliente.displayName}"
 
         if (deudor.ultimoPago != null) {
-            holder.textViewVencimiento.text = "Vencimiento: ${deudor.ultimoPago.fechaVencimiento}"
+            // Extraer solo la fecha (yyyy-MM-dd) sin la hora
+            val fechaVencimiento = if (deudor.ultimoPago.fechaVencimiento.length > 10) {
+                deudor.ultimoPago.fechaVencimiento.substring(0, 10)
+            } else {
+                deudor.ultimoPago.fechaVencimiento
+            }
+
+            holder.textViewVencimiento.text = "Vencimiento: $fechaVencimiento"
             holder.textViewDiasVencido.text = "Vencido hace ${deudor.diasVencido} día(s)"
+            holder.textViewDiasVencido.visibility = View.VISIBLE
 
             val color = when {
                 deudor.diasVencido > 30 -> android.graphics.Color.RED
@@ -134,12 +152,12 @@ class DeudoresAdapter(
 
         } else {
             // Cliente sin pagos
-            holder.textViewVencimiento.text = "Vencimiento: Sin pagos registrados"
-            holder.textViewDiasVencido.text = ""
-            holder.textViewDiasVencido.setTextColor(android.graphics.Color.BLACK)
+            holder.textViewVencimiento.text = "Sin pagos registrados"
+            holder.textViewDiasVencido.text = "Nunca pagó"
+            holder.textViewDiasVencido.visibility = View.VISIBLE
+            holder.textViewDiasVencido.setTextColor(android.graphics.Color.RED)
         }
     }
-
 
     override fun getItemCount() = deudores.size
 
