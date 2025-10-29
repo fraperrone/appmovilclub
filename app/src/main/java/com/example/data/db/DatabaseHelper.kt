@@ -1,4 +1,4 @@
-package com.example.layouts.data.db
+package com.example.data.db
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -13,7 +13,14 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 
     companion object {
         private const val DATABASE_NAME = "ClubDeportivo.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 2 // Incrementamos la versión
+
+        // Tabla Usuarios
+        const val TABLE_USUARIOS = "usuarios"
+        const val COLUMN_USUARIO_ID = "id"
+        const val COLUMN_USUARIO_NOMBRE = "nombre"
+        const val COLUMN_USUARIO_USERNAME = "username"
+        const val COLUMN_USUARIO_PASSWORD = "password"
 
         // Tabla Clientes
         const val TABLE_CLIENTES = "clientes"
@@ -36,6 +43,16 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
+        // Crear tabla usuarios
+        val createUsuariosTable = """
+            CREATE TABLE $TABLE_USUARIOS (
+                $COLUMN_USUARIO_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COLUMN_USUARIO_NOMBRE TEXT NOT NULL,
+                $COLUMN_USUARIO_USERNAME TEXT NOT NULL UNIQUE,
+                $COLUMN_USUARIO_PASSWORD TEXT NOT NULL
+            )
+        """.trimIndent()
+
         val createClientesTable = """
             CREATE TABLE $TABLE_CLIENTES (
                 $COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -60,13 +77,38 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
             )
         """.trimIndent()
 
+        db?.execSQL(createUsuariosTable)
         db?.execSQL(createClientesTable)
         db?.execSQL(createPagosTable)
+
+        // Insertar usuario por defecto
+        db?.execSQL("""
+            INSERT INTO $TABLE_USUARIOS ($COLUMN_USUARIO_NOMBRE, $COLUMN_USUARIO_USERNAME, $COLUMN_USUARIO_PASSWORD) 
+            VALUES ('Administrador', 'admin', 'admin123')
+        """)
+        db?.execSQL("""
+            INSERT INTO $TABLE_USUARIOS ($COLUMN_USUARIO_NOMBRE, $COLUMN_USUARIO_USERNAME, $COLUMN_USUARIO_PASSWORD) 
+            VALUES ('Empleado', 'emp', 'emp123')
+        """)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL("DROP TABLE IF EXISTS $TABLE_PAGOS")
-        db?.execSQL("DROP TABLE IF EXISTS $TABLE_CLIENTES")
-        onCreate(db)
+        if (oldVersion < 2) {
+            val createUsuariosTable = """
+                CREATE TABLE IF NOT EXISTS $TABLE_USUARIOS (
+                    $COLUMN_USUARIO_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    $COLUMN_USUARIO_NOMBRE TEXT NOT NULL,
+                    $COLUMN_USUARIO_USERNAME TEXT NOT NULL UNIQUE,
+                    $COLUMN_USUARIO_PASSWORD TEXT NOT NULL
+                )
+            """.trimIndent()
+            db?.execSQL(createUsuariosTable)
+
+            // Insertar usuario por defecto si no existe
+            db?.execSQL("""
+                INSERT OR IGNORE INTO $TABLE_USUARIOS ($COLUMN_USUARIO_NOMBRE, $COLUMN_USUARIO_USERNAME, $COLUMN_USUARIO_PASSWORD) 
+                VALUES ('Administrador', 'admin', 'admin123')
+            """)
+        }
     }
 }

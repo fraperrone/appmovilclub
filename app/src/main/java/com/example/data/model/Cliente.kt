@@ -1,4 +1,4 @@
-package com.example.layouts.data.model
+package com.example.data.model
 
 data class Cliente(
     val id: Int = 0,

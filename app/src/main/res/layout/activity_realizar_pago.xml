@@ -9,198 +9,213 @@
     android:background="#FBFBFB"
     tools:context=".RealizarPagoActivity">
 
-    <LinearLayout
+    <!-- Header con bienvenida -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_container"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#BF3B3B"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView_titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:fontFamily="@font/genos_medium"
-        android:text="Realizar Pago"
-        android:textColor="@color/black"
-        android:textSize="48sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header_container" />
-
-    <TextView
-        android:id="@+id/textView_documento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/genos_medium"
-        android:text="Documento"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_titulo" />
-
-    <EditText
-        android:id="@+id/editText_documento"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/bg_campo_realizar_pago"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_documento" />
-
-    <TextView
-        android:id="@+id/textView_nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/genos_medium"
-        android:text="Nombre"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_documento" />
-
-    <EditText
-        android:id="@+id/editText_nombre"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/bg_campo_realizar_pago"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_nombre" />
-
-    <TextView
-        android:id="@+id/textView_apellido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/genos_medium"
-        android:text="Apellido"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_nombre" />
-
-    <EditText
-        android:id="@+id/editText_apellido"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/bg_campo_realizar_pago"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_apellido" />
-
-    <TextView
-        android:id="@+id/textView_monto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/genos_medium"
-        android:text="Monto"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_apellido" />
-
-    <EditText
-        android:id="@+id/editText_monto"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/bg_campo_realizar_pago"
-        android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_monto" />
-
-    <TextView
-        android:id="@+id/textView_concepto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/genos_medium"
-        android:text="Concepto"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_monto" />
-
-    <EditText
-        android:id="@+id/editText_concepto"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/bg_campo_realizar_pago"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_concepto" />
-
-    <Button
-        android:id="@+id/button_enviar"
-        android:layout_width="153dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="92dp"
-        android:background="@drawable/bg_button_dark_red_background"
-        android:fontFamily="@font/genos_medium"
-        android:text="Enviar"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:backgroundTint="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_concepto" />
-
-
-    <LinearLayout
-        android:id="@+id/footer_container"
-        android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="@drawable/bg_footer"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
+        android:background="#BF3B3B"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <include layout="@layout/button_back" />
+        <TextView
+            android:id="@+id/textViewBienvenida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienvenido, Usuario"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:fontFamily="@font/genos_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+        <ImageView
+            android:id="@+id/btnBackPrincipal"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="6dp"
+            android:contentDescription="volver"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
 
-        <include layout="@layout/button_menu" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- ScrollView para el contenido -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/header_container"
+        app:layout_constraintBottom_toBottomOf="parent"        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/textView_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/genos_medium"
+                android:text="Realizar Pago"
+                android:textColor="@color/black"
+                android:textSize="48sp"
+                android:layout_marginBottom="24dp" />
+
+            <TextView
+                android:id="@+id/textView_documento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/genos_medium"
+                android:text="Documento"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editText_documento"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:background="@drawable/bg_edit_text_shape_mostrar_afiliados"
+                android:inputType="number"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <TextView
+                android:id="@+id/textView_nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/genos_medium"
+                android:text="Nombre"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editText_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:background="@drawable/bg_edit_text_shape_mostrar_afiliados"
+                android:inputType="textPersonName"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <TextView
+                android:id="@+id/textView_apellido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/genos_medium"
+                android:text="Apellido"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editText_apellido"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:background="@drawable/bg_edit_text_shape_mostrar_afiliados"
+                android:inputType="textPersonName"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <TextView
+                android:id="@+id/textView_monto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/genos_medium"
+                android:text="Monto"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editText_monto"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:background="@drawable/bg_edit_text_shape_mostrar_afiliados"
+                android:inputType="numberDecimal"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <TextView
+                android:id="@+id/textView_concepto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/genos_medium"
+                android:text="Concepto"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editText_concepto"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:background="@drawable/bg_edit_text_shape_mostrar_afiliados"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <Button
+                android:id="@+id/button_enviar"
+                android:layout_width="153dp"
+                android:layout_height="52dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/bg_button_dark_red_background"
+                android:fontFamily="@font/genos_medium"
+                android:text="Pagar"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:backgroundTint="@null" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
