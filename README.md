@@ -23,3 +23,7 @@ Estas credenciales permiten acceder al sistema con distintos niveles de permisos
 - **Empleado:**  
   Usuario: `emp`  
   Contraseña: `emp123`
+
+## Repositorio en GitHub
+
+[https://github.com/fraperrone/appmovilclub](https://github.com/fraperrone/appmovilclub)
