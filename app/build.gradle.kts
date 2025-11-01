@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt") //  necesario para Room
+
 }
 
 android {
@@ -57,4 +59,16 @@ dependencies {
     implementation("androidx.cardview:cardview:1.0.0")
 
     implementation("com.google.android.material:material:1.12.0")
+
+    // Room
+    //
+
+    // Room versión estable
+    implementation(libs.room.runtime)
+    kapt(libs.room.compiler)
+    implementation(libs.room.ktx)
+    testImplementation(libs.room.testing)
+
+
+
 }
