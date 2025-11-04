@@ -10,14 +10,21 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.data.repository.UsuarioRepository
+import androidx.lifecycle.lifecycleScope
+//import com.example.data.repository.UsuarioRepository
+import com.example.db.AppDatabase
+import com.example.db.dao.UsuarioDao
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var inputUsuario: EditText
     private lateinit var inputContrasenia: EditText
     private lateinit var btnEnviar: Button
-    private lateinit var usuarioRepository: UsuarioRepository
+//    private lateinit var usuarioRepository: UsuarioRepository
+
+    private lateinit var usuarioDao: UsuarioDao
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +38,14 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         inicializarVistas()
-        usuarioRepository = UsuarioRepository(this)
+//        usuarioRepository = UsuarioRepository(this)
+        usuarioDao = AppDatabase.getInstance(this).usuarioDao()
+
 
         btnEnviar.setOnClickListener {
-            validarLogin()
+            lifecycleScope.launch {
+                validarLogin()
+            }
         }
     }
 
@@ -44,7 +55,10 @@ class LoginActivity : AppCompatActivity() {
         btnEnviar = findViewById(R.id.btnEnviar)
     }
 
-    private fun validarLogin() {
+    private suspend fun validarLogin() {
+        lifecycleScope.launch{
+
+        }
         val username = inputUsuario.text.toString().trim()
         val password = inputContrasenia.text.toString().trim()
 
@@ -60,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        val usuario = usuarioRepository.validarCredenciales(username, password)
+        val usuario = usuarioDao.validarCredenciales(username,password)
 
         if (usuario != null) {
             // Guardar sesión

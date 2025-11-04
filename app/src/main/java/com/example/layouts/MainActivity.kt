@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity() {
 
         //des habilitamos temporalmente el resto de la app
 
-//        val intent = Intent(this@MainActivity, LoginActivity::class.java)
-//        startActivity(intent)
-//        finish()
+        val intent = Intent(this@MainActivity, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

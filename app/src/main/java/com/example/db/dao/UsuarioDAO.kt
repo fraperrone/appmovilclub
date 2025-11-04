@@ -16,4 +16,8 @@ interface UsuarioDao {
     //insertar
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertar(usuario: Usuario)
+
+    //validar credenciales
+    @Query("SELECT * FROM usuarios WHERE username = :username AND password = :password")
+    suspend fun validarCredenciales(username: String, password: String): Usuario?
 }
