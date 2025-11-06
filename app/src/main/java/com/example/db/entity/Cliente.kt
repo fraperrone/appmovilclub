@@ -9,6 +9,12 @@ data class Cliente(
     val nombre: String,
     val apellido: String,
     val documento: String,
-    val tipo_cliente: String,
-    val fecha_registro: String
+    val tipoCliente: TipoCliente,
+    val fechaRegistro: String
 )
+//agregamos tipo cliente enum class
+
+enum class TipoCliente {
+    SOCIO,
+    NO_SOCIO
+}

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.Room
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 
@@ -22,8 +23,9 @@ import kotlinx.coroutines.runBlocking
 
 @Database(
     entities = [Usuario::class, Cliente::class, Pago::class],
-    version = 2
+    version = 3
 )
+@TypeConverters(TipoClienteConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun usuarioDao(): UsuarioDao
     abstract fun clienteDao(): ClienteDao

@@ -9,10 +9,14 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.data.repository.ClienteRepository
-import com.example.data.model.Cliente
+import com.example.db.entity.Cliente
+import com.example.db.AppDatabase
+import com.example.db.dao.ClienteDao
+import kotlinx.coroutines.launch
 
 class VerAfiliadosActivity : AppCompatActivity() {
 
@@ -20,7 +24,7 @@ class VerAfiliadosActivity : AppCompatActivity() {
     private lateinit var buttonMostrar: Button
     private lateinit var recyclerView: RecyclerView
 
-    private lateinit var clienteRepository: ClienteRepository
+    private lateinit var clienteDao: ClienteDao
     private lateinit var adapter: AfiliadosAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +43,7 @@ class VerAfiliadosActivity : AppCompatActivity() {
         configurarBienvenida()
 
         inicializarVistas()
-        clienteRepository = ClienteRepository(this)
+        clienteDao = AppDatabase.getInstance(this).clienteDao()
 
         configurarRecyclerView()
         configurarBotones()
@@ -73,14 +77,19 @@ class VerAfiliadosActivity : AppCompatActivity() {
     }
 
     private fun mostrarAfiliados() {
-        val clientes = clienteRepository.obtenerTodosLosClientes()
 
-        if (clientes.isEmpty()) {
-            // Mostrar mensaje vacío
-            adapter.actualizarDatos(emptyList())
-        } else {
-            adapter.actualizarDatos(clientes)
+        lifecycleScope.launch {
+            val clientes = clienteDao.getTodos()
+
+            if (clientes.isEmpty()) {
+                // Mostrar mensaje vacío
+                adapter.actualizarDatos(emptyList())
+            } else {
+                adapter.actualizarDatos(clientes)
+            }
         }
+
+
     }
 }
 
@@ -106,7 +115,7 @@ class AfiliadosAdapter(
 
         holder.textViewNombre.text = "${cliente.apellido}, ${cliente.nombre}"
         holder.textViewDocumento.text = "Doc: ${cliente.documento}"
-        holder.textViewTipo.text = "Tipo: ${cliente.tipoCliente.displayName}"
+        holder.textViewTipo.text = "Tipo: ${cliente.tipoCliente}"
         holder.textViewFecha.text = "Registro: ${cliente.fechaRegistro.split(" ")[0]}"
     }
 

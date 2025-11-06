@@ -5,9 +5,20 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.data.repository.ClienteRepository
-import com.example.data.model.Cliente
-import com.example.data.model.TipoCliente
+import androidx.lifecycle.lifecycleScope
+import com.example.db.AppDatabase
+
+//modificados que no vamos a nbecesitar:
+//import com.example.data.repository.ClienteRepository
+//import com.example.data.model.Cliente
+//import com.example.data.model.TipoCliente
+
+// los nuevos repositorios:
+import com.example.db.entity.TipoCliente
+import com.example.db.entity.Cliente
+import com.example.db.dao.ClienteDao
+import kotlinx.coroutines.launch
+
 
 class RegistrarClienteActivity : AppCompatActivity() {
 
@@ -20,7 +31,7 @@ class RegistrarClienteActivity : AppCompatActivity() {
     private lateinit var radioNoSocio: RadioButton
     private lateinit var buttonGuardar: Button
 
-    private lateinit var clienteRepository: ClienteRepository
+    private lateinit var clienteRepository: ClienteDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +49,7 @@ class RegistrarClienteActivity : AppCompatActivity() {
         configurarBienvenida()
 
         inicializarVistas()
-        clienteRepository = ClienteRepository(this)
+        clienteRepository = AppDatabase.getInstance(this).clienteDao()
 
         configurarBotones()
 
@@ -65,13 +76,16 @@ class RegistrarClienteActivity : AppCompatActivity() {
 
     private fun configurarBotones() {
         buttonGuardar.setOnClickListener {
-            if (validarCampos()) {
-                registrarCliente()
+            lifecycleScope.launch {
+                if (validarCampos()) {
+                    registrarCliente()
+                }
             }
+
         }
     }
 
-    private fun validarCampos(): Boolean {
+    private suspend fun validarCampos(): Boolean {
         val nombre = editTextNombre.text.toString().trim()
         val apellido = editTextApellido.text.toString().trim()
         val documento = editTextDocumento.text.toString().trim()
@@ -106,7 +120,7 @@ class RegistrarClienteActivity : AppCompatActivity() {
         }
 
         // Validar que el documento no exista
-        val clienteExistente = clienteRepository.obtenerClientePorDocumento(documento)
+        val clienteExistente = clienteRepository.getPorDocumento(documento)
         if (clienteExistente != null) {
             editTextDocumento.error = "Este documento ya está registrado"
             editTextDocumento.requestFocus()
@@ -116,7 +130,9 @@ class RegistrarClienteActivity : AppCompatActivity() {
         return true
     }
 
-    private fun registrarCliente() {
+
+    // MODIFICAMOS el registar cliente que es el tiene con capa
+    private suspend fun registrarCliente() {
         val nombre = editTextNombre.text.toString().trim()
         val apellido = editTextApellido.text.toString().trim()
         val documento = editTextDocumento.text.toString().trim()
@@ -130,7 +146,7 @@ class RegistrarClienteActivity : AppCompatActivity() {
             fechaRegistro = ""
         )
 
-        val resultado = clienteRepository.insertarCliente(cliente)
+        val resultado = clienteRepository.insertar(cliente)
 
         if (resultado != -1L) {
             Toast.makeText(
