@@ -7,12 +7,32 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.data.repository.ClienteRepository
-import com.example.data.repository.PagoRepository
-import com.example.data.model.Cliente
-import com.example.data.model.Pago
-import com.example.data.model.TipoCliente
-import com.example.data.model.TipoPago
+import androidx.lifecycle.lifecycleScope
+
+
+//Import con paquete viejo
+//import com.example.data.repository.ClienteRepository
+//import com.example.data.repository.PagoRepository
+//import com.example.data.model.Cliente
+//import com.example.data.model.Pago
+//import com.example.data.model.TipoCliente
+//import com.example.data.model.TipoPago
+
+import com.example.db.AppDatabase
+
+//import paquete actualizado
+
+import com.example.db.dao.ClienteDao
+import com.example.db.dao.PagoDao
+import com.example.db.entity.Cliente
+import com.example.db.entity.Pago
+import com.example.db.entity.TipoCliente
+import com.example.db.entity.TipoPago
+import kotlinx.coroutines.launch
+
+
+////
+
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -26,8 +46,15 @@ class RealizarPagoActivity : AppCompatActivity() {
     private lateinit var editTextConcepto: EditText
     private lateinit var buttonEnviar: Button
 
-    private lateinit var clienteRepository: ClienteRepository
-    private lateinit var pagoRepository: PagoRepository
+    // private lateinit var clienteRepository: ClienteRepository
+    // private lateinit var pagoRepository: PagoRepository
+
+
+    // Las clases DAO
+    private lateinit var clienteDao: ClienteDao
+    private lateinit var pagoDao: PagoDao
+
+
     private var clienteActual: Cliente? = null
     private val dateOnlyFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
@@ -45,8 +72,12 @@ class RealizarPagoActivity : AppCompatActivity() {
 
         configurarBienvenida()
         inicializarVistas()
-        clienteRepository = ClienteRepository(this)
-        pagoRepository = PagoRepository(this)
+        // clienteRepository = ClienteRepository(this)
+        // pagoRepository = PagoRepository(this)
+
+        //inicializamos la actualizacion Dao
+        clienteDao = AppDatabase.getInstance(this).clienteDao()
+        pagoDao = AppDatabase.getInstance(this).pagoDao()
 
         configurarBusquedaCliente()
         configurarBotones()
@@ -81,7 +112,10 @@ class RealizarPagoActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 val documento = s.toString().trim()
                 if (documento.length >= 7) {
-                    buscarCliente(documento)
+                    lifecycleScope.launch {
+                        buscarCliente(documento)
+                    }
+                    //buscarCliente(documento)
                 } else {
                     limpiarDatosCliente()
                 }
@@ -89,8 +123,13 @@ class RealizarPagoActivity : AppCompatActivity() {
         })
     }
 
-    private fun buscarCliente(documento: String) {
-        clienteActual = clienteRepository.obtenerClientePorDocumento(documento)
+    //Implementar nuestro DAO para buscar cliente
+
+
+    // IMPLAMENTAMOS SUSPEND
+    private suspend fun buscarCliente(documento: String) {
+        clienteActual = clienteDao.getPorDocumento(documento)
+
 
         if (clienteActual != null) {
             editTextNombre.setText(clienteActual!!.nombre)
@@ -123,11 +162,14 @@ class RealizarPagoActivity : AppCompatActivity() {
         editTextConcepto.text.clear()
     }
 
-    private fun configurarBotones() {
+    private  fun configurarBotones() {
         buttonEnviar.setOnClickListener {
-            if (validarCampos() && validarPagoActivo()) {
-                registrarPago()
+            lifecycleScope.launch {
+                if (validarCampos() && validarPagoActivo()) {
+                    registrarPago()
+                }
             }
+
         }
     }
 
@@ -163,8 +205,12 @@ class RealizarPagoActivity : AppCompatActivity() {
         return true
     }
 
-    private fun validarPagoActivo(): Boolean {
-        val ultimoPago = pagoRepository.obtenerUltimoPagoPorCliente(clienteActual!!.id)
+
+    // vamos implementar DAO para validar pago activo
+    private suspend fun validarPagoActivo(): Boolean {
+        // val ultimoPago = pagoRepository.obtenerUltimoPagoPorCliente(clienteActual!!.id)
+
+        val ultimoPago = pagoDao.getUltimoPagoPorCliente(clienteActual!!.id)
 
         if (ultimoPago != null) {
             try {
@@ -200,7 +246,7 @@ class RealizarPagoActivity : AppCompatActivity() {
         return true
     }
 
-    private fun registrarPago() {
+    private suspend fun registrarPago() {
         val monto = editTextMonto.text.toString().toDouble()
         val concepto = editTextConcepto.text.toString().trim()
 
@@ -209,7 +255,9 @@ class RealizarPagoActivity : AppCompatActivity() {
             TipoCliente.NO_SOCIO -> TipoPago.DIARIA
         }
 
-        val fechaVencimiento = pagoRepository.calcularFechaVencimiento(tipoPago)
+       // val fechaVencimiento = pagoRepository.calcularFechaVencimiento(tipoPago)
+        val fechaVencimiento = calcularFechaVencimiento(tipoPago)
+
 
         val pago = Pago(
             clienteId = clienteActual!!.id,
@@ -220,7 +268,9 @@ class RealizarPagoActivity : AppCompatActivity() {
             tipoPago = tipoPago
         )
 
-        val resultado = pagoRepository.registrarPago(pago)
+        //val resultado = pagoRepository.registrarPago(pago)
+        val resultado = pagoDao.insertar(pago)
+
 
         if (resultado != -1L) {
             Toast.makeText(
@@ -243,4 +293,15 @@ class RealizarPagoActivity : AppCompatActivity() {
         limpiarDatosCliente()
         editTextDocumento.requestFocus()
     }
+
+    //agregamos para calculo de fecha de vencimiento segun tipo de pago
+    private fun calcularFechaVencimiento(tipoPago: TipoPago): String {
+        val calendar = Calendar.getInstance()
+        when (tipoPago) {
+            com.example.db.entity.TipoPago.MENSUAL -> calendar.add(Calendar.MONTH, 1)
+            com.example.db.entity.TipoPago.DIARIA -> calendar.add(Calendar.DAY_OF_MONTH, 1)
+        }
+        return dateOnlyFormat.format(calendar.time)
+    }
+
 }

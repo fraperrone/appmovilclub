@@ -21,9 +21,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
+// QUITAMOS EL SCHEMA
 @Database(
     entities = [Usuario::class, Cliente::class, Pago::class],
-    version = 3
+    version = 4,
+    exportSchema = false
 )
 @TypeConverters(TipoClienteConverter::class)
 abstract class AppDatabase : RoomDatabase() {
